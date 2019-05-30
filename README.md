@@ -43,6 +43,7 @@ Fill the code in the functions that will add a user, get a user, update a user a
 ### INSERT a user
 ```javascript
 function insertUser(lastname, age, city, email, firstname) {
+  // TO DO: execute a prepared statement that inserts one user into the table
   const insert = 'INSERT INTO users (lastname, age, city, email, firstname) VALUES (?,?,?,?,?)';
   const params = [ lastname, age, city, email, firstname ];
   return client.execute(insert, params, { prepare : true });
@@ -51,6 +52,7 @@ function insertUser(lastname, age, city, email, firstname) {
 ### SELECT a user
 ```javascript
 function selectUser(lastname) {
+  // TO DO: execute a prepared that retrieves one user from the table
   const select = 'SELECT firstname, age FROM users WHERE lastname = ?';
   return client.execute(select, lastname, { prepare : true });
 }
@@ -59,6 +61,7 @@ function selectUser(lastname) {
 ### UPDATE a user's age
 ```javascript
 function updateUser(age, lastname) {
+    // TO DO: execute a prepared statement that updates the age of one user
     const update = 'UPDATE users SET age = ? WHERE lastname = ?';
     return client.execute(update, [ age, lastname ], { prepare : true } )
 }
@@ -67,7 +70,8 @@ function updateUser(age, lastname) {
 ### DELETE a user
 ```javascript
 function deleteUser(lastname) {
-    const query = 'DELETE FROM users WHERE lastname = ?';
+    //TO DO: execute a simple statement that deletes one user from the table
+    const remove = 'DELETE FROM users WHERE lastname = ?';
     return client.execute(query, lastname)
 }
 ```
