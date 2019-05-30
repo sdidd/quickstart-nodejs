@@ -1,25 +1,27 @@
 const cassandra = require('cassandra-driver');
-const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCenter: 'datacenter1',  keyspace: 'demo' });
+const client = new cassandra.Client({ 
+  contactPoints: ['127.0.0.1'], 
+  localDataCenter: 'datacenter1',  
+  keyspace: 'demo'
+});
 
 function insertUser(lastname, age, city, email, firstname) {
-  const insert = 'INSERT INTO users (lastname, age, city, email, firstname) VALUES (?,?,?,?,?)';
-  const params = [ lastname, age, city, email, firstname ];
-  return client.execute(insert, params, { prepare : true });
+  
+  // TO DO: execute a prepared statement that inserts one user into the table
 }
 
 function selectUser(lastname) {
-  const select = 'SELECT firstname, age FROM users WHERE lastname = ?';
-  return client.execute(select, lastname, { prepare : true });
+  
+   // TO DO: execute a prepared that retrieves one user from the table
 }
 
 function updateUser(age, lastname) {
-    const update = 'UPDATE users SET age = ? WHERE lastname = ?';
-    return client.execute(update, [ age, lastname ], { prepare : true } )
+  
+    // TO DO: execute a prepared statement that updates the age of one user
 }
 
 function deleteUser(lastname) {
-    const query = 'DELETE FROM users WHERE lastname = ?';
-    return client.execute(query, lastname)
+    // TO DO: execute a simple statement that deletes one user from the table
 }
 
 async function example() {
