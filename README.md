@@ -70,7 +70,7 @@ function updateUser(age, lastname) {
 ### DELETE a user
 ```javascript
 function deleteUser(lastname) {
-    //TO DO: execute a simple statement that deletes one user from the table
+    // TO DO: execute a simple statement that deletes one user from the table
     const remove = 'DELETE FROM users WHERE lastname = ?';
     return client.execute(query, lastname)
 }
