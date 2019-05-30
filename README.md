@@ -2,11 +2,11 @@
 
 A basic Node.js demo CRUD application using the DataStax Python Driver for Apache Cassandra. 
 The intent is to help users get up and running quickly with the driver. 
-If you are having trouble, the complete code solution for `quickstart.js` can be found [here](https://gist.github.com/beccam/c896674cc555e8857783f3fe91fbc8a0).
+If you are having trouble, the complete code solution for `quickstart.js` can be found [here](https://gist.github.com/beccam/270bff058b9e790bc4f1f19c8e99d473).
 
 ## Prerequisites
   * A running instance of [Apache Cassandra®](http://cassandra.apache.org/download/) 1.2+
-  * [Node.js](https://nodejs.org/en/download/) 
+  * [Node.js](https://nodejs.org/en/download/) server environment
   * Use npm to install the driver: `npm install cassandra-driver`
   
   ## Create the keyspace and table
