@@ -30,6 +30,7 @@ All of our code is contained in the `quickstart.js` file.
 The `cassandra.Client()` instancec connects to our cluster.
 You need to provide the address or host name of your node and your local data center name.
 ```javascipt
+// TO DO: Fill in your own host and data center
 const client = new cassandra.Client({ 
   contactPoints: ['127.0.0.1'], 
   localDataCenter: 'datacenter1',  
