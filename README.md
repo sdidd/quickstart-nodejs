@@ -27,8 +27,8 @@ CREATE TABLE demo.users (
 ## Connect to your cluster
 
 All of our code is contained in the `quickstart.js` file. 
-`cassandra.Client()` connects to our cluster.
-You need to provide the address or host name of your node in the cluster and your local data center name.
+The `cassandra.Client()` instancec connects to our cluster.
+You need to provide the address or host name of your node and your local data center name.
 ```javascipt
 const client = new cassandra.Client({ 
   contactPoints: ['127.0.0.1'], 
