@@ -57,6 +57,7 @@ function selectUser(lastname) {
   const select = 'SELECT firstname, age FROM users WHERE lastname = ?';
   const params = [ lastname ];
   return client.execute(select, params, { prepare : true });
+}  
 ```
 
 ### UPDATE a user's age
@@ -75,6 +76,7 @@ function deleteUser(lastname) {
   const remove = 'DELETE FROM users WHERE lastname = ?';
   const params = [ lastname ];
   return client.execute(query, params, { prepare: true })
+}  
 ```
  ## License
 Copyright 2019 Rebecca Mills
