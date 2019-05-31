@@ -73,7 +73,7 @@ function updateUser(age, lastname) {
 function deleteUser(lastname) {
   // TO DO: execute a simple statement that deletes one user from the table
   const remove = 'DELETE FROM users WHERE lastname = ?';
-  return client.execute(query, lastname)
+  return client.execute(remove, lastname)
 }
 ```
  ## License
