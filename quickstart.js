@@ -24,7 +24,7 @@ function updateUser(age, lastname) {
 
 function deleteUser(lastname) {
   
-  // TO DO: execute a simple statement that deletes one user from the table
+  // TO DO: execute a prepared statement that deletes one user from the table
 }
 
 async function example() {
