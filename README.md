@@ -55,8 +55,8 @@ function insertUser(lastname, age, city, email, firstname) {
 function selectUser(lastname) {
   // TO DO: execute a prepared that retrieves one user from the table
   const select = 'SELECT firstname, age FROM users WHERE lastname = ?';
-  return client.execute(select, lastname, { prepare : true });
-}
+  const params = [ lastname ];
+  return client.execute(select, params, { prepare : true });
 ```
 
 ### UPDATE a user's age
@@ -71,10 +71,10 @@ function updateUser(age, lastname) {
 ### DELETE a user
 ```javascript
 function deleteUser(lastname) {
-  // TO DO: execute a simple statement that deletes one user from the table
+  // TO DO: execute a prepared that deletes one user from the table
   const remove = 'DELETE FROM users WHERE lastname = ?';
-  return client.execute(remove, lastname)
-}
+  const params = [ lastname ];
+  return client.execute(query, params, { prepare: true })
 ```
  ## License
 Copyright 2019 Rebecca Mills
