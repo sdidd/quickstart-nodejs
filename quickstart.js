@@ -28,23 +28,24 @@ function deleteUser(lastname) {
 }
 
 async function example() {
+  await client.connect();
   await insertUser('Jones', 35, 'Austin', 'bob@example.com', 'Bob');
-  const rs1 = await selectUser(['Jones']);
-  if (rs1.rows.length > 0) {
-    const user1 = rs1.rows[0];
+  const rs1 = await selectUser('Jones');
+  const user1 = rs1.first();
+  if (user1) {
     console.log("name = %s, age = %d", user1.firstname, user1.age);
   } else {
     console.log("No results");
   }
   await updateUser(36, 'Jones');
-  const rs2 = await selectUser(['Jones']);
-  if (rs2.rows.length > 0) {
-    const user2 = rs2.rows[0];
+  const rs2 = await selectUser('Jones');
+  const user2 = rs2.first();
+  if (user2) {
     console.log("name = %s, age = %d", user2.firstname, user2.age);
   } else {
     console.log("No results");
   }
-  deleteUser(['Jones']);
+  await deleteUser('Jones');
 
   await client.shutdown();
 }
