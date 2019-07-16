@@ -53,7 +53,7 @@ function insertUser(lastname, age, city, email, firstname) {
 ### SELECT a user
 ```javascript
 function selectUser(lastname) {
-  // TO DO: execute a prepared that retrieves one user from the table
+  // TO DO: execute a prepared statement that retrieves one user from the table
   const select = 'SELECT firstname, age FROM users WHERE lastname = ?';
   const params = [ lastname ] ;
   return client.execute(select, params, { prepare : true });
