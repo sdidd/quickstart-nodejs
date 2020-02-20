@@ -5,6 +5,11 @@ If you are having trouble, the complete code solution for `quickstart.js` can be
 
 Contributors: [Rebecca Mills](https://github.com/beccam)
 
+## Project Layout
+
+* [quickstart.js](src/quickstart.js) - main application file with space to fill in CRUD operation code
+* [users.cql](users.cql) - Use this file to create the schema 
+
 ## Objectives
 
 * To demonstrate how to perform basic CRUD operations with the DataStax Node.js Driver.
