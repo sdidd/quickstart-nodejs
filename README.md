@@ -1,7 +1,7 @@
 # DataStax Node.js Driver for Apache Cassandra Quickstart
 
 A basic demo CRUD application using the DataStax Node.js Driver for Apache Cassandra. 
-If you are having trouble, the complete code solution for `quickstart.js` can be found [here](https://gist.github.com/beccam/270bff058b9e790bc4f1f19c8e99d473).
+Run the [quickstart-complete.js](quickstart-complete.js) file if you want to run the application with the complete code.
 
 Contributors: [Rebecca Mills](https://github.com/beccam)
 
