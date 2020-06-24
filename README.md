@@ -16,21 +16,21 @@ Contributors:
 ## Project Layout
 
 * [app.js](app.js) - main application file
-* [netflix-shows](netflix-shows.cql) - foundation CQL for reference or use
+* [netflix-shows.cql](netflix-shows.cql) - file to create the schema
 
 ## How this works
-To get started, read through the comments in the `app.js` to familiarize yourself with the steps for interacting with your own Cassandra database. The functions invoked by the `app.js` are created to provide more flexibility for modifications as you learn.
+To get started, read the `app.js` comments to learn the steps for interacting with your own Cassandra database. The functions invoked by the `app.js` are created to provide more flexibility for modifications as you learn.
 
 ## Setup and running
 
 ### Prerequisites
-If using [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites will be required. The Cassandra instance is provided with the DataStax Desktop stack as part of container provisioning.
+If using [DataStax Desktop](https://www.datastax.com/blog/2020/05/learn-cassandra-datastax-desktop), no prerequisites are required. The Cassandra instance is provided with the DataStax Desktop stack as part of container provisioning.
 
-If NOT using DataStax Desktop, spin up your own local instance of Cassandra exposing its address and port to align with the settings in the **app.js** file.  You will need to install and perform the following steps:
+If NOT using DataStax Desktop, spin up your own local instance of Cassandra exposing its address and port to align with the settings in the `app.js` file.  You will need to install and perform the following steps:
 
   * Install [Apache Cassandra®](http://cassandra.apache.org/download/) 3.x
   * [Node.js](https://nodejs.org/en/download/) server environment
-  * Use npm to install the driver: `npm install cassandra-driver`
+  * Installed Cassandra driver: `npm install cassandra-driver`
   * Create the keyspace and table.  The `netflix-shows.cql` file provides the schema used for this project.
 
 
@@ -46,7 +46,7 @@ const client = new cassandra.Client({
 
 ## Running
 
-Simply kickoff the app from the command line.
+Start the app from the command line.
 
 > node app.js
 
