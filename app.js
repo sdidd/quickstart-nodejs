@@ -21,7 +21,7 @@ async function createKeyspace() {
     KEYSPACE_NAME + ' WITH replication = {\'class\': \'SimpleStrategy\', \'replication_factor\': 1};'
 
   console.log('Creating Keyspace: %s', KEYSPACE_NAME)
-  client.execute(createKeyspaceQuery)
+  await client.execute(createKeyspaceQuery)
 }
 
 async function createPrimaryTable() {
