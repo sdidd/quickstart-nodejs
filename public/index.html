@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <!-- Add Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>User Management</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <form id="insertForm">
+        <h3>Insert User</h3>
+        <div class="form-group">
+          <label for="insertLastname">Lastname</label>
+          <input type="text" class="form-control" id="insertLastname" required>
+        </div>
+        <div class="form-group">
+          <label for="insertAge">Age</label>
+          <input type="number" class="form-control" id="insertAge" required>
+        </div>
+        <div class="form-group">
+          <label for="insertCity">City</label>
+          <input type="text" class="form-control" id="insertCity" required>
+        </div>
+        <div class="form-group">
+          <label for="insertEmail">Email</label>
+          <input type="email" class="form-control" id="insertEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="insertFirstname">Firstname</label>
+          <input type="text" class="form-control" id="insertFirstname" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="insertUser()">Insert User</button>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <form id="selectForm">
+        <h3>Select User</h3>
+        <div class="form-group">
+          <label for="selectLastname">Lastname</label>
+          <input type="text" class="form-control" id="selectLastname" required>
+        </div>
+        <button type="button" class="btn btn-success" onclick="selectUser()">Select User</button>
+        <label id="result"></label>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Count Section -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <h3>User Count</h3>
+      <button type="button" class="btn btn-info" onclick="getUserCount()">Get User Count</button>
+      <div id="userCountResult"></div>
+    </div>
+  </div>
+
+  <!-- All Users Section -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h3>All Users</h3>
+      <button type="button" class="btn btn-secondary" onclick="getAllUsers()">Get All Users</button>
+      <table class="table mt-3">
+        <thead>
+          <tr>
+            <th scope="col">Lastname</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Age</th>
+            <th scope="col">City</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody id="allUsersTableBody">
+          <!-- Table rows will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- Add Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Add your custom JavaScript here -->
+<script>
+  async function insertUser() {
+    const lastname = document.getElementById('insertLastname').value;
+    const age = document.getElementById('insertAge').value;
+    const city = document.getElementById('insertCity').value;
+    const email = document.getElementById('insertEmail').value;
+    const firstname = document.getElementById('insertFirstname').value;
+
+    try {
+      const response = await fetch('/insertUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ lastname, age, city, email, firstname }),
+      });
+
+      const result = await response.text();
+      document.getElementById('result').innerText = result;
+    } catch (error) {
+      console.error(error);
+      document.getElementById('result').innerText = 'Error occurred while inserting user.';
+    }
+  }
+
+  async function selectUser() {
+    const lastname = document.getElementById('selectLastname').value;
+
+    try {
+      const response = await fetch(`/selectUser/${lastname}`);
+      const result = await response.json();
+
+      if (result) {
+        document.getElementById('result').innerText = `Firstname: ${result.firstname}, Age: ${result.age}`;
+      } else {
+        document.getElementById('result').innerText = 'User not found.';
+      }
+    } catch (error) {
+      console.error(error);
+      document.getElementById('result').innerText = 'Error occurred while selecting user.';
+    }
+  }
+
+  async function getUserCount() {
+    try {
+      const response = await fetch('/getUserCount');
+      const result = await response.text();
+      document.getElementById('userCountResult').innerText = `User Count: ${result}`;
+    } catch (error) {
+      console.error(error);
+      document.getElementById('userCountResult').innerText = 'Error occurred while getting user count.';
+    }
+  }
+
+  async function getAllUsers() {
+    try {
+      const response = await fetch('/getAllUsers');
+      const result = await response.json();
+
+      const tableBody = document.getElementById('allUsersTableBody');
+      tableBody.innerHTML = '';
+
+      if (result && result.rows && result.rows.length > 0) {
+        result.rows.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.lastname}</td>
+            <td>${user.firstname}</td>
+            <td>${user.age}</td>
+            <td>${user.city}</td>
+            <td>${user.email}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } else {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="5">No users found</td>';
+        tableBody.appendChild(row);
+      }
+    } catch (error) {
+      console.error(error);
+      tableBody.innerHTML = 'Error occurred while getting all users.';
+    }
+  }
+  // Add similar functions for other operations (update, delete, additional APIs) as needed
+</script>
+
+</body>
+</html>

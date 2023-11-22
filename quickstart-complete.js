@@ -1,10 +1,13 @@
-const cassandra = require('cassandra-driver');
+import { Client } from 'cassandra-driver';
+import cassandra from 'cassandra-driver';
 
+let authProvider = new cassandra.auth.PlainTextAuthProvider('cassandra', 'cassandra');
 // TO DO: Fill in your own host and data center
-const client = new cassandra.Client({
+const client = new Client({
   contactPoints: ['127.0.0.1'],
   localDataCenter: 'datacenter1',
-  keyspace: 'demo'
+  keyspace: 'demo',
+  authProvider: authProvider
 });
 
 function insertUser(lastname, age, city, email, firstname) {
@@ -34,27 +37,57 @@ function deleteUser(lastname) {
   return client.execute(remove, params, { prepare: true })
 }
 
-async function example() {
-  await client.connect();
-  await insertUser('Jones', 35, 'Austin', 'bob@example.com', 'Bob');
-  const rs1 = await selectUser('Jones');
-  const user1 = rs1.first();
-  if (user1) {
-    console.log("name = %s, age = %d", user1.firstname, user1.age);
-  } else {
-    console.log("No results");
-  }
-  await updateUser(36, 'Jones');
-  const rs2 = await selectUser('Jones');
-  const user2 = rs2.first();
-  if (user2) {
-    console.log("name = %s, age = %d", user2.firstname, user2.age);
-  } else {
-    console.log("No results");
-  }
-  await deleteUser('Jones');
 
-  await client.shutdown();
+// Function to retrieve all users
+async function getAllUsers() {
+  // TO DO: Implement functionality to retrieve all users
+  const selectAll = 'SELECT * FROM users';
+  const params = [];
+  return await client.execute(selectAll, params, { prepare: true });
 }
 
-example();
+function updateUserProperties(lastname, age, city, email, firstname) {
+  // TO DO: Implement functionality to update multiple user properties
+  const update = 'UPDATE users SET age = ?, city = ?, email = ?, firstname = ? WHERE lastname = ?';
+  const params = [ age, city, email, firstname, lastname ];
+  return client.execute(update, params, { prepare: true });
+}
+
+function deleteAllUsers() {
+  // TO DO: Implement functionality to delete all users
+  const query = 'TRUNCATE users';
+  return client.execute(query, [], { prepare: true });
+}
+
+function getUserCount() {
+  // TO DO: Implement functionality to retrieve user count
+  const query = 'SELECT COUNT(*) as count FROM users';
+  return client.execute(query, [], { prepare: true });
+}
+
+function getUsersByAge(min, max) {
+  // TO DO: Implement functionality to retrieve users within a specific age range
+  const query = 'SELECT * FROM users WHERE age >= ? AND age <= ?';
+  const params = [ min, max ];
+  return client.execute(query, params, { prepare: true });
+}
+
+function getUsersByCity(city) {
+  // TO DO: Implement functionality to retrieve users from a specific city
+  const query = 'SELECT * FROM users WHERE city = ?';
+  const params = [ city ];
+  return client.execute(query, params, { prepare: true });
+}
+
+export {
+  insertUser,
+  selectUser,
+  updateUser,
+  deleteUser,
+  getAllUsers,
+  updateUserProperties,
+  deleteAllUsers,
+  getUserCount,
+  getUsersByAge,
+  getUsersByCity
+};
